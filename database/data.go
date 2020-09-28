@@ -1,11 +1,14 @@
 package database
 
+import "github.com/Kamva/mgm"
+
 type MythologicalCreature struct {
-	Name      string                  `json:"name" validate:"required"`
-	Nation    string                  `json:"nation" validate:"required"`
-	Power     string                  `json:"power"`
-	Type      string                  `json:"type" validate:"required"`
-	Relations []*MythologicalCreature `json:"relations"`
+	mgm.DefaultModel `bson:",inline"`
+	Name             string                  `json:"name" bson:"name" validate:"required"`
+	Nation           string                  `json:"nation" bson:"nation" validate:"required"`
+	Power            string                  `json:"power" bson:"power"`
+	Type             string                  `json:"type" bson:"type" validate:"required"`
+	Relations        []*MythologicalCreature `json:"relations" bson:"relations"`
 }
 
 var Database = []*MythologicalCreature{

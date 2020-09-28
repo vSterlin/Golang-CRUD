@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/Kamva/mgm"
 	"github.com/go-playground/validator"
 	"github.com/vSterlin/mythology/database"
 )
@@ -20,6 +21,10 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		for _, err := range err.(validator.ValidationErrors) {
 			fmt.Println(err.Field() + " is " + err.Tag())
 		}
+	}
+	err = mgm.Coll(newCreature).Create(newCreature)
+	if err != nil {
+		fmt.Println(err)
 	}
 	database.Database = append(database.Database, newCreature)
 }
